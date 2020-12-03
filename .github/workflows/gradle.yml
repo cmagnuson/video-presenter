@@ -30,7 +30,8 @@ jobs:
     - name: Archive Artifact
       uses: actions/upload-artifact@v2
       with:
-        files: |
+        name: video-presenter
+        path: |
           app/build/jpackage/*.pkg
           app/build/jpackage/*.exe
           app/build/jpackage/*.deb
