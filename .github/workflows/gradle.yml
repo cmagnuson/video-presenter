@@ -27,8 +27,8 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build jpackage
-    - uses: actions/upload-artifact@v2
     - name: Archive Artifact
+      uses: actions/upload-artifact@v2
       with:
         files: |
           app/build/jpackage/*.pkg
