@@ -30,7 +30,7 @@ jobs:
     - name: Archive Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: video-presenter
+        name: video-presenter-${{ matrix.os }}
         path: |
           app/build/jpackage/*.pkg
           app/build/jpackage/*.exe
@@ -52,6 +52,4 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            *.pkg
-            *.exe
-            *.deb
+            video-presenter*
