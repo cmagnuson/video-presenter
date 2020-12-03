@@ -54,4 +54,6 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            video-presenter*
+            video-presenter-macos-latest/*
+            video-presenter-ubuntu-latest/*
+            video-presenter-windows-latest/*
