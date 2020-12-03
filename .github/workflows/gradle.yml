@@ -27,10 +27,12 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build jpackage
-    - uses: actions/upload-artifact@v2
+    - name: Publish release
+      uses: "marvinpinto/action-automatic-releases@latest"
       with:
-        name: video-presenter
-        path: |
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        prerelease: false
+        files: |
           app/build/jpackage/*.pkg
           app/build/jpackage/*.exe
           app/build/jpackage/*.deb
