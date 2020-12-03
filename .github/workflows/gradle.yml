@@ -27,14 +27,30 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build jpackage
-    - name: Publish release
-      uses: "marvinpinto/action-automatic-releases@latest"
+    - uses: actions/upload-artifact@v2
+    - name: Archive Artifact
       with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        automatic_release_tag: "latest"
-        prerelease: true
-        title: "Development Build"
         files: |
           app/build/jpackage/*.pkg
           app/build/jpackage/*.exe
           app/build/jpackage/*.deb
+          
+  release:
+    name: release
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Builds
+        uses: actions/download-artifact@v2
+      - name: Publish release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            *.pkg
+            *.exe
+            *.deb
