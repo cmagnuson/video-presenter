@@ -24,3 +24,10 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build jpackage
+    - uses: actions/upload-artifact@v2
+      with:
+        name: video-presenter
+        path: |
+          app/build/jpackage/*.pkg
+          app/build/jpackage/*.exe
+          app/build/jpackage/*.deb
