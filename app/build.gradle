@@ -10,6 +10,7 @@ plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
     id 'org.beryx.runtime' version '1.11.4'
+    id 'com.palantir.graal' version '0.7.2'
 }
 
 repositories {
@@ -27,10 +28,18 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 application {
     // Define the main class for the application.
     mainClass = 'com.mtecresults.videopresenter.GuiDriver'
-    applicationName = 'Video Presenter'
+    applicationName = 'video_presenter'
+}
+
+graal {
+    mainClass application.mainClassName
+    outputName application.applicationName
 }
 
 runtime {
