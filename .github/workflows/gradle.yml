@@ -26,15 +26,16 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build jpackage
+      run: ./gradlew build nativeImage
+    - name: Rename exe
+      if: contains(matrix.os, 'ubuntu') || contains(matrix.os, 'macos')
+      run: mv app/build/graal/video_presenter app/build/graal/video_presenter-${{ matrix.os }}
     - name: Archive Artifact
       uses: actions/upload-artifact@v2
       with:
         name: video-presenter-${{ matrix.os }}
         path: |
-          app/build/jpackage/*.pkg
-          app/build/jpackage/*.exe
-          app/build/jpackage/*.deb
+          app/build/graal/*
           
   release:
     name: release
